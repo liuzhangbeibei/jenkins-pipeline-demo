@@ -14,13 +14,13 @@ node('51reboot') {
     }
     stage('Build') {
         echo "3.Build Docker Image Stage"
-        sh "docker build -t zhangchuan/jenkins-pipeline-demo:${build_tag} ."
+        sh "docker build -t liujjdocker/study:${build_tag} ."
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
         withCredentials([usernamePassword(credentialsId: 'DockerHub', passwordVariable: 'DockerHubPassword', usernameVariable: 'DockerHubUser')]) {
             sh "docker login -u ${DockerHubUser} -p ${DockerHubPassword}"
-            sh "docker push zhangchuan/jenkins-pipeline-demo:${build_tag}"
+            sh "docker push liujjdocker/study:${build_tag}"
         }
     }
     stage('Deploy') {
